@@ -1,17 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-type Inventory struct {
-	name string
-	quantity int
-}
-
-type Character struct {
-	name string
-	class string
-	level int
-	max_hp int
-	hp int
-	inventory []inventory
+func main() {
+	inv := []Inventory{
+		{name: "Potion", quantity: 3},
+	}
+	c1 := initCharacter("Fish", "Elfe", 1, 100, 40, inv)
+	fmt.Println(c1)
 }
