@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 func main() {
 	inv := []Inventory{
 		{name: "Potion", quantity: 3},
