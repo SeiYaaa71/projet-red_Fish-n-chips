@@ -2,12 +2,14 @@ package main
 
 func main() {
 	c1 := initCharacter(
-		"Marcel",
+		"TonNom",
 		"Elfe",
 		1,
 		100,
 		40,
-		[]string{"Potion", "Potion", "Potion"},
+		[]string{"Potion"},
 	)
 	menu(&c1)
+	isDead(&c1)
+	displayInfo(c1)
 }

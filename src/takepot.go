@@ -4,7 +4,6 @@ import "fmt"
 
 // Fonction pour utiliser une potion
 func takePot(c *Character) {
-	// Vérifie si une potion existe dans l'inventaire
 	index := -1
 	for i, item := range c.Inventaire {
 		if item == "Potion" {
@@ -18,10 +17,10 @@ func takePot(c *Character) {
 		return
 	}
 
-	// Retirer la potion de l'inventaire
-	c.Inventaire = append(c.Inventaire[:index], c.Inventaire[index+1:]...)
+	// Retirer la potion avec removeInventory
+	removeInventory(c, index)
 
-	// Récupérer 50 PV (sans dépasser PVMax)
+	// Ajouter 50 PV sans dépasser PVMax
 	c.PVActuels += 50
 	if c.PVActuels > c.PVMax {
 		c.PVActuels = c.PVMax
