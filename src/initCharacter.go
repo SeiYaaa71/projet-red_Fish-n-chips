@@ -9,5 +9,6 @@ func initCharacter(nom string, classe string, niveau int, pvMax int, pvActuels i
 		PVActuels:  pvActuels,
 		Inventaire: inventaire,
 		Skills:     []string{"Coup de poing"},
+		Gold:	    100,
 	}
 }

@@ -8,4 +8,5 @@ type Character struct {
 	PVActuels  int
 	Inventaire []string
 	Skills     []string
+	Gold	   int
 }

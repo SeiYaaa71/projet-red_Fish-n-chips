@@ -11,5 +11,6 @@ func displayInfo(c Character) {
 	fmt.Printf("Points de vie : %d/%d\n", c.PVActuels, c.PVMax)
 	fmt.Println("Inventaire  :", c.Inventaire)
 	fmt.Println("Compétences :", c.Skills)
+	fmt.Println("Gold        :", c.Gold)
 	fmt.Println("=================================")
 }

@@ -9,12 +9,12 @@ import (
 func menu(c *Character) {
 	for {
 		clearScreen() // Nettoie l’écran avant d’afficher le menu
-		fmt.Println("\n=== MENU PRINCIPAL ===")
-		fmt.Println("1. Afficher les informations du personnage")
-		fmt.Println("2. Accéder au contenu de l’inventaire")
-		fmt.Println("3. Marchand")
-		fmt.Println("4. Quitter")
-		fmt.Print("Votre choix : ")
+		fmt.Println(Bold + Blue + "\n=== MENU PRINCIPAL ===" + Reset)
+		fmt.Println(Green + "1." + Reset + " Afficher les informations du personnage")
+		fmt.Println(Green + "2." + Reset + " Accéder au contenu de l’inventaire")
+		fmt.Println(Green + "3." + Reset + " Marchand")
+		fmt.Println(Red + "4." + Reset + " Quitter")
+		fmt.Print(Yellow + "\nVotre choix : " + Reset)
 
 		var choix int
 		fmt.Scanln(&choix)
@@ -32,10 +32,10 @@ func menu(c *Character) {
 			clearScreen()
 			merchant(c)
 		case 4:
-			fmt.Println("👋 Au revoir !")
+			fmt.Println(Red + "👋 Au revoir !" + Reset)
 			os.Exit(0)
 		default:
-			fmt.Println("❌ Choix invalide, réessayez.")
+			fmt.Println(Red + "❌ Choix invalide, réessayez." + Reset)
 		}
 	}
 }

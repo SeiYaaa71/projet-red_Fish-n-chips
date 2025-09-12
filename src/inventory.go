@@ -3,8 +3,10 @@ package main
 import "fmt"
 
 func addInventory(c *Character, item string) {
-	c.Inventaire = append(c.Inventaire, item)
-	fmt.Printf("✅ Vous avez obtenu : %s\n", item)
+	if canAddItem(c) {
+		c.Inventaire = append(c.Inventaire, item)
+		fmt.Printf("✅ %s a été ajouté à l’inventaire.\n", item)
+	}
 }
 
 func removeInventory(c *Character, index int) {

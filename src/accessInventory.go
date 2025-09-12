@@ -1,27 +1,27 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // Sous-menu inventaire
 func accessInventory(c *Character) {
 	for {
-		fmt.Println("\n=== INVENTAIRE ===")
+		clearScreen()
+		fmt.Println(Bold + Blue + "\n=== INVENTAIRE ===" + Reset)
+
 		if len(c.Inventaire) == 0 {
-			fmt.Println("Inventaire vide")
+			fmt.Println(Red + "Inventaire vide" + Reset)
 		} else {
 			for i, item := range c.Inventaire {
-				fmt.Printf("%d. %s\n", i+1, item)
+				fmt.Printf(Green+"%d."+Reset+" %s\n", i+1, item)
 			}
 		}
 
 		fmt.Println("\nOptions :")
-		fmt.Println("1. Utiliser une Potion de vie")
-		fmt.Println("2. Utiliser une Potion de poison")
-		fmt.Println("3. Utiliser Livre de Sort : Boule de Feu")
-		fmt.Println("4. Retour au menu principal")
-		fmt.Print("Votre choix : ")
+		fmt.Println(Green + "1." + Reset + " Utiliser une Potion de vie")
+		fmt.Println(Green + "2." + Reset + " Utiliser une Potion de poison")
+		fmt.Println(Green + "3." + Reset + " Utiliser un Livre de Sort : Boule de Feu")
+		fmt.Println(Red + "4." + Reset + " Retour au menu principal")
+		fmt.Print(Yellow + "\nVotre choix : " + Reset)
 
 		var choix int
 		fmt.Scanln(&choix)
@@ -32,24 +32,11 @@ func accessInventory(c *Character) {
 		case 2:
 			poisonPot(c)
 		case 3:
-			// Vérifie si le joueur a le livre dans son inventaire
-			index := -1
-			for i, item := range c.Inventaire {
-				if item == "Livre de Sort : Boule de Feu" {
-					index = i
-					break
-				}
-			}
-			if index == -1 {
-				fmt.Println("❌ Vous n’avez pas ce livre dans votre inventaire.")
-			} else {
-				spellBook(c)
-				removeInventory(c, index) // Retire le livre après usage
-			}
+			spellBook(c)
 		case 4:
 			return
 		default:
-			fmt.Println("❌ Choix invalide, réessayez.")
+			fmt.Println(Red + "❌ Choix invalide, réessayez." + Reset)
 		}
 	}
 }

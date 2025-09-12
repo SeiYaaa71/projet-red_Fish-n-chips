@@ -2,30 +2,33 @@ package main
 
 import "fmt"
 
-// Interface du marchand
+// Interface du marchand avec système de gold
 func merchant(c *Character) {
 	for {
-		fmt.Println("\n=== MARCHAND ===")
-		fmt.Println("1. Acheter une Potion de vie (gratuit)")
-		fmt.Println("2. Acheter une Potion de poison (gratuit)")
-		fmt.Println("3. Acheter Livre de Sort : Boule de Feu (gratuit)")
-		fmt.Println("4. Retour au menu principal")
-		fmt.Print("Votre choix : ")
+		clearScreen()
+		fmt.Println(Bold + Blue + "\n=== MARCHAND ===" + Reset)
+		fmt.Printf("%sOr%s : %d pièces\n\n", Yellow, Reset, c.Gold)
+		
+		fmt.Println(Green + "1." + Reset + " Acheter une Potion de vie (20 or)")
+		fmt.Println(Green + "2." + Reset + " Acheter une Potion de poison (15 or)")
+		fmt.Println(Green + "3." + Reset + " Acheter un Livre de Sort : Boule de Feu (50 or)")
+		fmt.Println(Red + "4." + Reset + " Retour au menu principal")
+		fmt.Print(Yellow + "\nVotre choix : " + Reset)
 
 		var choix int
 		fmt.Scanln(&choix)
 
 		switch choix {
 		case 1:
-			addInventory(c, "Potion")
+			buyItem(c, "Potion", 20)
 		case 2:
-			addInventory(c, "Potion de poison")
+			buyItem(c, "Potion de poison", 15)
 		case 3:
-			addInventory(c, "Livre de Sort : Boule de Feu")
+			buyItem(c, "Livre de Sort : Boule de Feu", 50)
 		case 4:
 			return
 		default:
-			fmt.Println("❌ Choix invalide, réessayez.")
+			fmt.Println(Red + "❌ Choix invalide, réessayez." + Reset)
 		}
 	}
 }
