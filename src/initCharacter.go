@@ -1,6 +1,6 @@
 package main
 
-func initCharacter(nom string, classe string, niveau int, pvMax int, pvActuels int, inventaire []string) Character {
+func initCharacter(nom string, classe string, niveau int, pvMax int, pvActuels int, inventaire []string, spellBook []string) Character {
 	return Character{
 		Nom:        nom,
 		Classe:     classe,
@@ -8,5 +8,6 @@ func initCharacter(nom string, classe string, niveau int, pvMax int, pvActuels i
 		PVMax:      pvMax,
 		PVActuels:  pvActuels,
 		Inventaire: inventaire,
+		Skills:     []string{"Coup de poing"},
 	}
 }

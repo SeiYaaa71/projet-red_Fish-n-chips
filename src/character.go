@@ -7,4 +7,5 @@ type Character struct {
 	PVMax      int
 	PVActuels  int
 	Inventaire []string
+	Skills     []string
 }
