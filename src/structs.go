@@ -13,7 +13,7 @@ type Character struct {
 	PVActuels        int
 	Gold             int
 	Inventaire       []string
-	Skill           []string
+	Skill            []string
 	Equipement       Equipment
 	ExpActuelle      int
 	ExpMax           int

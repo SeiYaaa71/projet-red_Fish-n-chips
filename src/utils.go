@@ -33,7 +33,6 @@ const (
 	Bold   = "\033[1m"
 )
 
-// Pause jusqu'à ce que le joueur appuie sur Entrée
 func waitForEnter() {
 	fmt.Print("\n" + Cyan + "Appuyez sur Entrée pour continuer..." + Reset)
 	bufio.NewReader(os.Stdin).ReadBytes('\n')

@@ -24,12 +24,13 @@ func menuEquipement(c *Character) {
 				continue
 			}
 
+			// Affiche seulement l’inventaire
 			fmt.Println(Bold + Blue + "\n=== INVENTAIRE ===" + Reset)
 			for i, item := range c.Inventaire {
 				fmt.Printf(Green+"%d."+Reset+" %s\n", i+1, item)
 			}
 
-			fmt.Print(Yellow + "\nEntrez le numéro de l’objet à équiper : " + Reset)
+			fmt.Print(Yellow + "\nNuméro de l’objet à équiper : " + Reset)
 			var index int
 			fmt.Scanln(&index)
 
@@ -40,11 +41,12 @@ func menuEquipement(c *Character) {
 			}
 
 			item := c.Inventaire[index-1]
-			equipItem(c, item)
+			equipItem(c, item)   // ⚡ équipe l’objet
+			fmt.Println(Green + "✅ Objet équipé !" + Reset)
 			waitForEnter()
 
 		case 2:
-			return
+			return // retour au menu principal
 
 		default:
 			fmt.Println(Red + "❌ Choix invalide." + Reset)

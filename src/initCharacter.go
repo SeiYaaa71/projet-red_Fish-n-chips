@@ -8,12 +8,12 @@ func initCharacter(nom string, classe string) *Character {
 		PVActuels:        50,
 		Gold:             100,
 		Inventaire:       []string{},
-		Skill:           []string{"Coup de poing"},
+		Skill:            []string{"Coup de poing"},
 		ExpActuelle:      0,
 		ExpMax:           50,
 		Niveau:           1,
 		InventoryMax:     10,
-		InventoryUpgrades: 0, // initialisation à zéro
+		InventoryUpgrades: 0,
 	}
 	return c
 }
