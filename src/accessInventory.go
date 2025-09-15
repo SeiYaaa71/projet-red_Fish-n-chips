@@ -2,17 +2,16 @@ package main
 
 import "fmt"
 
-// Sous-menu inventaire
 func accessInventory(c *Character) {
 	for {
 		clearScreen()
 		fmt.Println(Bold + Blue + "\n=== INVENTAIRE ===" + Reset)
-
 		if len(c.Inventaire) == 0 {
 			fmt.Println(Red + "Inventaire vide" + Reset)
 		} else {
+			fmt.Println(Green + "Vos objets :" + Reset)
 			for i, item := range c.Inventaire {
-				fmt.Printf(Green+"%d."+Reset+" %s\n", i+1, item)
+				fmt.Printf("%d. %s\n", i+1, item)
 			}
 		}
 
@@ -28,15 +27,16 @@ func accessInventory(c *Character) {
 
 		switch choix {
 		case 1:
-			takePot(c)
+			takePot(c, "Potion de vie")
 		case 2:
-			poisonPot(c)
+			takePot(c, "Potion de poison")
 		case 3:
 			spellBook(c)
 		case 4:
 			return
 		default:
 			fmt.Println(Red + "❌ Choix invalide, réessayez." + Reset)
+			waitForEnter()
 		}
 	}
 }

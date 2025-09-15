@@ -9,7 +9,7 @@ import (
 )
 
 // Fonction pour créer un personnage personnalisé
-func characterCreation() Character {
+func characterCreation() *Character {
 	reader := bufio.NewReader(os.Stdin)
 
 	// --- Nom ---
@@ -43,9 +43,9 @@ func characterCreation() Character {
 	var pvMax int
 	for {
 		fmt.Println("\nChoisissez une classe :")
-		fmt.Println("1. Requin (100 PV max)")
-		fmt.Println("2. Poisson Clown (80 PV max)")
-		fmt.Println("3. Orque (120 PV max)")
+		fmt.Println("1. Humain (100 PV max)")
+		fmt.Println("2. Elfe (80 PV max)")
+		fmt.Println("3. Nain (120 PV max)")
 		fmt.Print("Votre choix : ")
 
 		var choix int
@@ -53,13 +53,13 @@ func characterCreation() Character {
 
 		switch choix {
 		case 1:
-			classe = "Requin"
+			classe = "Humain"
 			pvMax = 100
 		case 2:
-			classe = "Poisson Clown"
+			classe = "Elfe"
 			pvMax = 80
 		case 3:
-			classe = "Requin"
+			classe = "Nain"
 			pvMax = 120
 		default:
 			fmt.Println("❌ Choix invalide, réessayez.")
@@ -67,15 +67,14 @@ func characterCreation() Character {
 		}
 		break
 	}
-
-	// --- Initialisation du personnage ---
 	return initCharacter(
-		nom,
-		classe,
-		1,                          // Niveau
-		pvMax,                      // PV max
-		pvMax/2,                    // PV actuels = 50% PV max
-		[]string{"Potion"},         // Inventaire
-		[]string{"Coup de Poing"},  // Sort de base
+	nom,
+	classe,
+	1,                   // Niveau
+	pvMax,               // PV Max
+	pvMax/2,             // PV actuels = 50 %
+	[]string{},          // Inventaire vide
+	[]string{"Coup de poing"}, // Skill de base
+	100,                 // Golds de départ
 	)
 }
