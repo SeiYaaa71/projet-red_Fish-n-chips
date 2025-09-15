@@ -5,7 +5,6 @@ import (
 	"os"
 )
 
-// Fonction pour afficher le menu principal
 func menu(c *Character) {
 	for {
 		clearScreen()
@@ -15,7 +14,8 @@ func menu(c *Character) {
 		fmt.Println(Green + "3." + Reset + " Marchand")
 		fmt.Println(Green + "4." + Reset + " Forgeron")
 		fmt.Println(Green + "5." + Reset + " Afficher l'équipement")
-		fmt.Println(Red + "6." + Reset + " Quitter")
+		fmt.Println(Green + "6." + Reset + " Combat d'entraînement") // ✅ nouvelle option
+		fmt.Println(Red + "7." + Reset + " Quitter")
 		fmt.Print(Yellow + "\nVotre choix : " + Reset)
 
 		var choix int
@@ -41,7 +41,10 @@ func menu(c *Character) {
 			displayEquipment(c)
 			fmt.Println("\n(Appuyez sur Entrée pour revenir au menu)")
 			waitForEnter()
-		case 6:
+		case 6: // Combat d'entraînement
+			clearScreen()
+			trainingFight(c) // fonction à créer pour gérer le combat
+		case 7:
 			fmt.Println(Red + "👋 Au revoir !" + Reset)
 			os.Exit(0)
 		default:

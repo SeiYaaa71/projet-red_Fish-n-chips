@@ -8,7 +8,6 @@ import (
 	"unicode"
 )
 
-// Fonction pour créer un personnage personnalisé
 func characterCreation() *Character {
 	reader := bufio.NewReader(os.Stdin)
 
@@ -19,7 +18,6 @@ func characterCreation() *Character {
 		input, _ := reader.ReadString('\n')
 		input = strings.TrimSpace(input)
 
-		// Vérifie que le nom contient uniquement des lettres
 		valid := true
 		for _, r := range input {
 			if !unicode.IsLetter(r) {
@@ -33,14 +31,12 @@ func characterCreation() *Character {
 			continue
 		}
 
-		// Mise en forme : première lettre majuscule, reste en minuscule
 		nom = strings.Title(strings.ToLower(input))
 		break
 	}
 
 	// --- Classe ---
 	var classe string
-	var pvMax int
 	for {
 		fmt.Println("\nChoisissez une classe :")
 		fmt.Println("1. Humain (100 PV max)")
@@ -54,27 +50,30 @@ func characterCreation() *Character {
 		switch choix {
 		case 1:
 			classe = "Humain"
-			pvMax = 100
 		case 2:
 			classe = "Elfe"
-			pvMax = 80
 		case 3:
 			classe = "Nain"
-			pvMax = 120
 		default:
 			fmt.Println("❌ Choix invalide, réessayez.")
 			continue
 		}
 		break
 	}
-	return initCharacter(
-	nom,
-	classe,
-	1,                   // Niveau
-	pvMax,               // PV Max
-	pvMax/2,             // PV actuels = 50 %
-	[]string{},          // Inventaire vide
-	[]string{"Coup de poing"}, // Skill de base
-	100,                 // Golds de départ
-	)
+
+	// Crée le perso
+	c := initCharacter(nom, classe)
+
+	// Ajuste ses PV selon la classe
+	switch classe {
+	case "Humain":
+		c.PVMax = 100
+	case "Elfe":
+		c.PVMax = 80
+	case "Nain":
+		c.PVMax = 120
+	}
+	c.PVActuels = c.PVMax / 2
+
+	return c
 }

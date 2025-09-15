@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"bufio"
-	"os"
 )
 
 // Fonction générique pour acheter un item
@@ -15,16 +13,14 @@ func buyItem(c *Character, item string, price int) {
 		return
 	}
 
-	if canAddItem(c) {
-		c.Gold -= price
-		c.Inventaire = append(c.Inventaire, item)
-		fmt.Printf(Green+"✅ Vous avez acheté %s pour %d or.\n"+Reset, item, price)
+	if len(c.Inventaire) >= c.InventoryMax {
+		fmt.Println(Red + "❌ Votre inventaire est plein, impossible d’acheter cet objet." + Reset)
 		waitForEnter()
+		return
 	}
-}
 
-// Pause jusqu'à ce que le joueur appuie sur Entrée
-func waitForEnter() {
-	fmt.Print("\n" + Cyan + "Appuyez sur Entrée pour continuer..." + Reset)
-	bufio.NewReader(os.Stdin).ReadBytes('\n')
+	c.Gold -= price
+	c.Inventaire = append(c.Inventaire, item)
+	fmt.Printf(Green+"✅ Vous avez acheté %s pour %d or.\n"+Reset, item, price)
+	waitForEnter()
 }
