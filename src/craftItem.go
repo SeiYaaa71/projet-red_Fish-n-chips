@@ -16,14 +16,14 @@ func craftItem(c *Character, item string, price int) {
 		return
 	}
 
-	// Vérification de l'inventaire disponible
+	// Vérification de l'inventaire (au cas où, mais on n’ajoute plus l’objet dedans)
 	if len(c.Inventaire) >= c.InventoryMax {
 		fmt.Println(Red + "❌ Inventaire plein, impossible de fabriquer cet objet." + Reset)
 		waitForEnter()
 		return
 	}
 
-	// Vérification des matériaux
+	// Vérification des matériaux nécessaires
 	materials, ok := recipe[item]
 	if ok {
 		for mat, qty := range materials {
@@ -34,7 +34,7 @@ func craftItem(c *Character, item string, price int) {
 			}
 		}
 
-		// Suppression des matériaux
+		// Retire les matériaux de l'inventaire
 		for mat, qty := range materials {
 			for i := 0; i < qty; i++ {
 				removeInventory(c, mat)
@@ -42,9 +42,12 @@ func craftItem(c *Character, item string, price int) {
 		}
 	}
 
-	// Déduction de l'or et ajout de l'objet
+	// Déduction de l'or
 	c.Gold -= price
-	c.Inventaire = append(c.Inventaire, item)
-	fmt.Printf(Green+"✅ Vous avez fabriqué %s pour %d or.\n"+Reset, item, price)
+
+	// ⚡ Au lieu d’ajouter dans l’inventaire → équipe directement
+	equipItem(c, item)
+
+	fmt.Printf(Green+"✅ Vous avez fabriqué et équipé %s pour %d or.\n"+Reset, item, price)
 	waitForEnter()
 }

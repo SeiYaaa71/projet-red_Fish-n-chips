@@ -14,7 +14,7 @@ func menu(c *Character) {
 		fmt.Println(Green + "3." + Reset + " Marchand")
 		fmt.Println(Green + "4." + Reset + " Forgeron")
 		fmt.Println(Green + "5." + Reset + " Afficher l'équipement")
-		fmt.Println(Green + "6." + Reset + " Combat d'entraînement") // ✅ nouvelle option
+		fmt.Println(Green + "6." + Reset + " Combat d'entraînement")
 		fmt.Println(Red + "7." + Reset + " Quitter")
 		fmt.Print(Yellow + "\nVotre choix : " + Reset)
 

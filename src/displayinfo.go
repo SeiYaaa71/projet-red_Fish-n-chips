@@ -13,7 +13,7 @@ func displayInfo(c *Character) {
 	fmt.Printf("🔮 Compétences : %v\n", c.Skill)
 
 	fmt.Println("\n=== Équipement ===")
-	fmt.Printf("🪖 Tête  : %s\n", c.Equipement.Tete)
+	fmt.Printf("🪖  Tête  : %s\n", c.Equipement.Tete)
 	fmt.Printf("👕 Torse : %s\n", c.Equipement.Torse)
 	fmt.Printf("🥾 Pieds : %s\n", c.Equipement.Pieds)
 }
