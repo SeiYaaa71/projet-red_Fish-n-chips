@@ -39,9 +39,9 @@ func characterCreation() *Character {
 	var classe string
 	for {
 		fmt.Println("\nChoisissez une classe :")
-		fmt.Println("1. Humain (100 PV max)")
-		fmt.Println("2. Elfe (80 PV max)")
-		fmt.Println("3. Nain (120 PV max)")
+		fmt.Println(Red + "1. Assassin (100 PV max)" + Reset)
+		fmt.Println(Blue + "2. Mage (80 PV max)" + Reset)
+		fmt.Println(Purple + "3. Nécromancien (120 PV max)" + Reset)
 		fmt.Print("Votre choix : ")
 
 		var choix int
@@ -49,11 +49,11 @@ func characterCreation() *Character {
 
 		switch choix {
 		case 1:
-			classe = "Humain"
+			classe = "Assassin"
 		case 2:
-			classe = "Elfe"
+			classe = "Mage"
 		case 3:
-			classe = "Nain"
+			classe = "Nécromancien"
 		default:
 			fmt.Println("❌ Choix invalide, réessayez.")
 			continue
@@ -66,14 +66,14 @@ func characterCreation() *Character {
 
 	// Ajuste ses PV selon la classe
 	switch classe {
-	case "Humain":
+	case "Assassin":
 		c.PVMax = 100
-	case "Elfe":
+	case "Mage":
 		c.PVMax = 80
-	case "Nain":
+	case "Nécromancien":
 		c.PVMax = 120
 	}
-	c.PVActuels = c.PVMax / 2
+	c.PVActuels = c.PVMax
 
 	return c
 }

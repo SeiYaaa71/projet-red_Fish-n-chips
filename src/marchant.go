@@ -13,7 +13,7 @@ func merchant(c *Character) {
 		fmt.Println(Green + "1." + Reset + " Potion de vie (3 or)")
 		fmt.Println(Green + "2." + Reset + " Potion de poison (6 or)")
 		fmt.Println(Green + "3." + Reset + " Fourrure de Loup (4 or)")
-		fmt.Println(Green + "4." + Reset + " Peau de Troll (7 or)")
+		fmt.Println(Green + "4." + Reset + " Peau de Goblin (7 or)")
 		fmt.Println(Green + "5." + Reset + " Cuir de Sanglier (3 or)")
 		fmt.Println(Green + "6." + Reset + " Plume de Corbeau (1 or)")
 
@@ -38,7 +38,7 @@ func merchant(c *Character) {
 		case 3:
 			buyItem(c, "Fourrure de Loup", 4)
 		case 4:
-			buyItem(c, "Peau de Troll", 7)
+			buyItem(c, "Peau de Goblin", 7)
 		case 5:
 			buyItem(c, "Cuir de Sanglier", 3)
 		case 6:
@@ -51,7 +51,7 @@ func merchant(c *Character) {
 					fmt.Printf(Green+"✅ Inventaire amélioré : %d/3\n"+Reset, c.InventoryUpgrades)
 					waitForEnter()
 				} else {
-					fmt.Println(Red + "❌ Vous n’avez pas assez de pièces d’or pour acheter une augmentation d’inventaire." + Reset)
+					fmt.Println(Red + "❌ Pas assez d'or pour augmenter l’inventaire." + Reset)
 					waitForEnter()
 				}
 			} else {

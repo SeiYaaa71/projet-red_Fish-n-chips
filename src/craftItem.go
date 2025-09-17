@@ -3,9 +3,9 @@ package main
 import "fmt"
 
 var recipe = map[string]map[string]int{
-	"Chapeau de l’aventurier": {"Plume de Corbeau": 1, "Cuir de Sanglier": 1},
-	"Tunique de l’aventurier": {"Fourrure de Loup": 2, "Peau de Troll": 1},
-	"Bottes de l’aventurier":  {"Fourrure de Loup": 1, "Cuir de Sanglier": 1},
+	"Casque du Chasseur": {"Plume de Corbeau": 1, "Cuir de Sanglier": 1},
+	"Armure du Chasseur": {"Fourrure de Loup": 2, "Peau de Goblin": 1},
+	"Bottes du Chasseur":  {"Fourrure de Loup": 1, "Cuir de Sanglier": 1},
 }
 
 func craftItem(c *Character, item string, price int) {

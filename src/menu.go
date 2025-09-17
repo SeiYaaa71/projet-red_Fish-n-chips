@@ -1,21 +1,22 @@
 package main
 
-import (
-	"fmt"
-	"os"
-)
+import "fmt"
 
 func menu(c *Character) {
 	for {
 		clearScreen()
+		fmt.Println(Bold + Cyan + "=== Jeu RPG Console ===" + Reset)
+
 		fmt.Println(Bold + Blue + "\n=== MENU PRINCIPAL ===" + Reset)
 		fmt.Println(Green + "1." + Reset + " Afficher les informations du personnage")
-		fmt.Println(Green + "2." + Reset + " Accéder au contenu de l’inventaire")
+		fmt.Println(Green + "2." + Reset + " Afficher l’inventaire")
 		fmt.Println(Green + "3." + Reset + " Marchand")
 		fmt.Println(Green + "4." + Reset + " Forgeron")
-		fmt.Println(Green + "5." + Reset + " Afficher l'équipement")
-		fmt.Println(Green + "6." + Reset + " Combat d'entraînement")
-		fmt.Println(Red + "7." + Reset + " Quitter")
+		fmt.Println(Green + "5." + Reset + " Équipement")
+		fmt.Println(Green + "6." + Reset + " Combat d’entraînement")
+		fmt.Println(Purple + "7." + Reset + " Mode Donjon")
+		fmt.Println(Red + "8." + Reset + " Quitter le jeu")
+
 		fmt.Print(Yellow + "\nVotre choix : " + Reset)
 
 		var choix int
@@ -23,30 +24,27 @@ func menu(c *Character) {
 
 		switch choix {
 		case 1:
-			clearScreen()
 			displayInfo(c)
-			fmt.Println("\n(Appuyez sur Entrée pour revenir au menu)")
 			waitForEnter()
 		case 2:
-			clearScreen()
 			accessInventory(c)
 		case 3:
-			clearScreen()
 			merchant(c)
 		case 4:
-			clearScreen()
 			forgeron(c)
 		case 5:
-			clearScreen()
 			displayEquipment(c)
-			fmt.Println("\n(Appuyez sur Entrée pour revenir au menu)")
 			waitForEnter()
-		case 6: // Combat d'entraînement
-			clearScreen()
-			trainingFight(c) // fonction à créer pour gérer le combat
+		case 6:
+			// Combat d’entraînement : gobelin classique
+			trainingFight(c)
+			waitForEnter()
 		case 7:
-			fmt.Println(Red + "👋 Au revoir !" + Reset)
-			os.Exit(0)
+			// Mode Donjon : système d’étages
+			startDungeonRun(c)
+		case 8:
+			fmt.Println(Red + "👋 Merci d’avoir joué !" + Reset)
+			return // Quitter le jeu
 		default:
 			fmt.Println(Red + "❌ Choix invalide, réessayez." + Reset)
 			waitForEnter()

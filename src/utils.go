@@ -31,6 +31,7 @@ const (
 	Magenta= "\033[35m"
 	Cyan   = "\033[36m"
 	Bold   = "\033[1m"
+	Purple = "\033[35m"
 )
 
 func waitForEnter() {

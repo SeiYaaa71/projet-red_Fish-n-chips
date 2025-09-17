@@ -4,7 +4,7 @@ import "fmt"
 
 func equipItem(c *Character, item string) {
 	switch item {
-	case "Chapeau de l’aventurier":
+	case "Casque du Chasseur":
 		if c.Equipement.Tete != "" {
 			c.Inventaire = append(c.Inventaire, c.Equipement.Tete)
 			fmt.Println(Yellow + "↺ " + c.Equipement.Tete + " a été replacé dans l’inventaire." + Reset)
@@ -12,7 +12,7 @@ func equipItem(c *Character, item string) {
 		c.Equipement.Tete = item
 		fmt.Println(Green + "✅ Vous avez équipé : " + item + Reset)
 
-	case "Tunique de l’aventurier":
+	case "Armure du Chasseur":
 		if c.Equipement.Torse != "" {
 			c.Inventaire = append(c.Inventaire, c.Equipement.Torse)
 			fmt.Println(Yellow + "↺ " + c.Equipement.Torse + " a été replacé dans l’inventaire." + Reset)
@@ -20,7 +20,7 @@ func equipItem(c *Character, item string) {
 		c.Equipement.Torse = item
 		fmt.Println(Green + "✅ Vous avez équipé : " + item + Reset)
 
-	case "Bottes de l’aventurier":
+	case "Bottes du Chasseur":
 		if c.Equipement.Pieds != "" {
 			c.Inventaire = append(c.Inventaire, c.Equipement.Pieds)
 			fmt.Println(Yellow + "↺ " + c.Equipement.Pieds + " a été replacé dans l’inventaire." + Reset)
@@ -48,13 +48,13 @@ func recalcPVMax(c *Character) {
 	basePV := 100 // tu peux adapter selon la classe
 	bonus := 0
 
-	if c.Equipement.Tete == "Chapeau de l’aventurier" {
+	if c.Equipement.Tete == "Casque du Chasseur" {
 		bonus += 10
 	}
-	if c.Equipement.Torse == "Tunique de l’aventurier" {
+	if c.Equipement.Torse == "Armure du Chasseur" {
 		bonus += 25
 	}
-	if c.Equipement.Pieds == "Bottes de l’aventurier" {
+	if c.Equipement.Pieds == "Bottes du Chasseur" {
 		bonus += 15
 	}
 

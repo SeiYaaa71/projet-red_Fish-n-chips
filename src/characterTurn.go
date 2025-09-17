@@ -2,122 +2,131 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
-// Tour du joueur
+// characterTurn simule le tour du joueur
 func characterTurn(c *Character, m *Monster, tour *int) {
 	for {
-		clearScreen()
-		fmt.Printf(Bold+Blue+"--- Tour %d ---\n"+Reset, *tour)
-		fmt.Printf("❤️ PV Joueur : %d/%d | 💀 PV Ennemi : %d/%d\n", c.PVActuels, c.PVMax, m.PVActuels, m.PVMax)
-		fmt.Println("\nActions disponibles :")
-		fmt.Println(Green + "1." + Reset + " Attaquer (coup classique)")
-		fmt.Println(Green + "2." + Reset + " Utiliser un sort")
-		fmt.Println(Green + "3." + Reset + " Utiliser un objet")
-		fmt.Println(Red + "4." + Reset + " Fuir le combat")
+		fmt.Println(Bold + Cyan + "\n=== VOTRE TOUR ===" + Reset)
+		fmt.Println(Green + "1."+ Reset + "Attaquer")
+		fmt.Println(Green + "2."+ Reset + "Utiliser un sort")
+		fmt.Println(Green + "3."+ Reset + "Utiliser un objet")
+		fmt.Println(Green + "4."+ Reset + "Abandonner le combat")
+		fmt.Print(Yellow + "\nVotre choix : " + Reset)
 
 		var choix int
-		fmt.Print(Yellow + "\nVotre choix : " + Reset)
 		fmt.Scanln(&choix)
 
 		switch choix {
-		case 1:
-			// Attaque classique
-			damage := 10
-			fmt.Printf("🗡 Vous attaquez et infligez %d dégâts au %s !\n", damage, m.Nom)
+		case 1: // Attaque basique
+			damage := 5
 			m.PVActuels -= damage
-			waitForEnter()
-			return
+			if m.PVActuels < 0 {
+				m.PVActuels = 0
+			}
+			fmt.Printf(Green+"%s inflige %d dégâts à %s ! (PV %d/%d)\n"+Reset,
+				c.Nom, damage, m.Nom, m.PVActuels, m.PVMax)
+			return // Fin du tour du joueur
 
-		case 2:
-			// Menu des sorts
-			fmt.Println("\n--- Sorts disponibles ---")
-			fmt.Println(Green + "1." + Reset + " Coup de poing (8 dégâts)")
-			fmt.Println(Green + "2." + Reset + " Boule de feu (18 dégâts)")
-			fmt.Println(Green + "3." + Reset + " Retour")
-
-			var spell int
+		case 2: // Sorts
+			fmt.Println("\n=== SORTS ===")
+			fmt.Println("1. Coup de poing (8 dégâts)")
+			fmt.Println("2. Boule de feu (18 dégâts)")
+			fmt.Println("3. Sort de soin (+20 PV)")
 			fmt.Print(Yellow + "\nVotre choix : " + Reset)
-			fmt.Scanln(&spell)
 
-			switch spell {
+			var sortChoix int
+			fmt.Scanln(&sortChoix)
+
+			switch sortChoix {
 			case 1:
-				fmt.Println("👊 Vous utilisez Coup de poing et infligez 8 dégâts !")
-				m.PVActuels -= 8
+				damage := 8
+				m.PVActuels -= damage
+				if m.PVActuels < 0 {
+					m.PVActuels = 0
+				}
+				fmt.Printf(Green+"%s utilise Coup de poing et inflige %d dégâts à %s ! (PV %d/%d)\n"+Reset,
+					c.Nom, damage, m.Nom, m.PVActuels, m.PVMax)
 			case 2:
-				fmt.Println("🔥 Vous lancez une Boule de feu et infligez 18 dégâts !")
-				m.PVActuels -= 18
+				damage := 18
+				m.PVActuels -= damage
+				if m.PVActuels < 0 {
+					m.PVActuels = 0
+				}
+				fmt.Printf(Green+"%s lance Boule de feu et inflige %d dégâts à %s ! (PV %d/%d)\n"+Reset,
+					c.Nom, damage, m.Nom, m.PVActuels, m.PVMax)
 			case 3:
-				continue
-			default:
-				fmt.Println(Red + "❌ Choix invalide." + Reset)
-			}
-			waitForEnter()
-			return
-
-		case 3:
-			// Inventaire
-			if len(c.Inventaire) == 0 {
-				fmt.Println(Red + "❌ Votre inventaire est vide." + Reset)
-				waitForEnter()
-				continue
-			}
-
-			fmt.Println("\n--- Inventaire ---")
-			for i, item := range c.Inventaire {
-				fmt.Printf("%d. %s\n", i+1, item)
-			}
-			fmt.Printf("%d. Retour\n", len(c.Inventaire)+1)
-
-			var choixItem int
-			fmt.Print(Yellow + "\nVotre choix : " + Reset)
-			fmt.Scanln(&choixItem)
-
-			if choixItem < 1 || choixItem > len(c.Inventaire)+1 {
-				fmt.Println(Red + "❌ Choix invalide." + Reset)
-				waitForEnter()
-				continue
-			}
-			if choixItem == len(c.Inventaire)+1 {
-				continue
-			}
-
-			item := c.Inventaire[choixItem-1]
-
-			// Utilisation des objets
-			if strings.Contains(item, "Potion de vie") {
-				c.PVActuels += 20
+				heal := 20
+				c.PVActuels += heal
 				if c.PVActuels > c.PVMax {
 					c.PVActuels = c.PVMax
 				}
-				fmt.Println(Green + "🍷 Vous buvez une potion de vie et regagnez 20 PV." + Reset)
+				fmt.Printf(Green+"%s utilise un sort de soin et récupère %d PV ! (PV %d/%d)\n"+Reset,
+					c.Nom, heal, c.PVActuels, c.PVMax)
+			default:
+				fmt.Println(Red + "❌ Sort invalide !" + Reset)
+				continue
+			}
+			return // Fin du tour après utilisation d'un sort
 
-			} else if strings.Contains(item, "Potion de poison") {
-				fmt.Printf(Green+"☠ Vous jetez une potion de poison sur %s !\n"+Reset, m.Nom)
-				m.Effets = append(m.Effets, Effect{Nom: "Poison", Duration: 3, DamagePerTurn: 5})
+		case 3: // Objets
+			if len(c.Inventaire) == 0 {
+				fmt.Println(Red + "❌ Votre inventaire est vide !" + Reset)
+				return
+			}
+			fmt.Println("\n=== OBJETS ===")
+			for i, item := range c.Inventaire {
+				fmt.Printf("%d. %s\n", i+1, item)
+			}
+			fmt.Print(Yellow + "\nNuméro de l’objet à utiliser : " + Reset)
 
-			} else {
-				fmt.Println(Red + "❌ Cet objet n’a aucun effet utilisable en combat." + Reset)
-				waitForEnter()
+			var index int
+			fmt.Scanln(&index)
+			if index < 1 || index > len(c.Inventaire) {
+				fmt.Println(Red + "❌ Choix invalide." + Reset)
 				continue
 			}
 
-			// Retire l’objet utilisé
-			c.Inventaire = append(c.Inventaire[:choixItem-1], c.Inventaire[choixItem:]...)
-			waitForEnter()
-			return
+			item := c.Inventaire[index-1]
+			switch item {
+			case "Potion de vie":
+				useHealthPotion(c)
+			case "Potion de poison":
+				fmt.Println("1. Se jeter la potion de poison")
+				fmt.Println("2. Lancer la potion de poison sur le monstre")
+				fmt.Print(Yellow + "\nVotre choix : " + Reset)
+				var pChoix int
+				fmt.Scanln(&pChoix)
+				if pChoix == 1 {
+					usePoison(c)
+				} else if pChoix == 2 {
+					throwPoisonOnMonster(m)
+				} else {
+					fmt.Println(Red + "❌ Choix invalide !" + Reset)
+					continue
+				}
+			default:
+				fmt.Println(Red + "❌ Objet non utilisable en combat !" + Reset)
+				continue
+			}
+
+			// Retirer l'objet de l'inventaire après usage
+			c.Inventaire = append(c.Inventaire[:index-1], c.Inventaire[index:]...)
+			return // Fin du tour après utilisation d’un objet
 
 		case 4:
-			// Fuite
-			fmt.Println(Red + "🏳 Vous tentez de fuir le combat !" + Reset)
-			c.PVActuels = 0 // considéré comme abandon
-			waitForEnter()
+			// Abandon
+			fmt.Println(Red + "\n🏳 Vous abandonnez le combat !" + Reset)
+			c.Gold -= 10
+			if c.Gold < 0 {
+				c.Gold = 0
+			}
+			// On peut gérer un flag pour sortir de la boucle combat
+			c.AbandonCombat = true
 			return
 
 		default:
-			fmt.Println(Red + "❌ Choix invalide." + Reset)
-			waitForEnter()
+			fmt.Println(Red + "❌ Choix invalide !" + Reset)
 		}
 	}
 }
