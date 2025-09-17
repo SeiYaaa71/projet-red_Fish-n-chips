@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 // Fonction qui ajoute de l'expérience au joueur et gère les niveaux
-func gainExperience(c *Character, expGagne int) {
+func gainExp(c *Character, expGagne int) {
 	fmt.Printf(Green+"✨ Vous gagnez %d points d'expérience !\n"+Reset, expGagne)
 	c.ExpActuelle += expGagne
 

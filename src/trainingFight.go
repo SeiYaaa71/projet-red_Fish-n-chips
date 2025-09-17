@@ -3,59 +3,54 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"time"
 )
 
+// Combat d’entraînement contre un gobelin
 func trainingFight(c *Character) {
-	goblin := initGoblin()
-	turn := 1
+	goblin := initGoblin() // déjà un *Monster
+	tour := 1
 
-	for goblin.PVActuels > 0 && c.PVActuels > 0 {
-		clearScreen()
-		fmt.Printf(Bold+"Tour %d\n"+Reset, turn)
+	fmt.Println(Bold + Red + "\n⚔ Un gobelin apparaît pour l’entraînement !" + Reset)
 
-		// Tour du joueur
-		characterTurn(c, &goblin)
+	for !c.isDead() && !goblin.isDead() {
+		// --- Applique les effets (poison, etc.) au début du tour ---
+		applyEffects(c, goblin)
 
-		// Vérif si le gobelin est mort
-		if goblin.PVActuels <= 0 {
-			fmt.Println(Green + "🎉 Vous avez vaincu le Gobelin d'entraînement !" + Reset)
-
-			// Gain d'expérience
-			gainExp(c, goblin.ExpReward)
-
-			// Gain d’or aléatoire
-			rand.Seed(time.Now().UnixNano())
-			goldReward := rand.Intn(goblin.PVMax/2-goblin.PVMax/5+1) + goblin.PVMax/5
-			c.Gold += goldReward
-			fmt.Printf(Yellow+"💰 Vous avez gagné %d pièces d’or !\n"+Reset, goldReward)
-
-			waitForEnter()
-			return
+		// Vérifie si quelqu’un est mort après les effets
+		if c.isDead() || goblin.isDead() {
+			break
 		}
 
-		// Tour du gobelin
-		if c.PVActuels > 0 {
-			if turn%3 == 0 {
-				damage := goblin.Attaque * 2
-				c.PVActuels -= damage
-				fmt.Printf(Red+"%s inflige à %s %d dégâts (attaque puissante)!\n"+Reset,
-					goblin.Nom, c.Nom, damage)
-			} else {
-				damage := goblin.Attaque
-				c.PVActuels -= damage
-				fmt.Printf(Red+"%s inflige à %s %d dégâts.\n"+Reset,
-					goblin.Nom, c.Nom, damage)
-			}
-
-			if c.PVActuels < 0 {
-				c.PVActuels = 0
-			}
-
-			fmt.Printf("❤️ %s : %d/%d PV\n", c.Nom, c.PVActuels, c.PVMax)
-			waitForEnter()
+		// --- Tour du joueur ---
+		characterTurn(c, goblin, &tour)
+		if goblin.isDead() {
+			break
 		}
 
-		turn++
+		// --- Tour du gobelin ---
+		goblinPattern(goblin, c, tour)
+		tour++
+	}
+
+	// --- Résultat du combat ---
+	if goblin.isDead() {
+		fmt.Println(Green + "\n🏆 Vous avez vaincu le Gobelin d’entraînement !" + Reset)
+		gainExp(c, goblin.ExpReward)
+
+		// Récompense en or (aléatoire entre GoldMin et GoldMax)
+		reward := rand.Intn(goblin.GoldMax-goblin.GoldMin+1) + goblin.GoldMin
+		c.Gold += reward
+		fmt.Printf(Yellow+"💰 Vous ramassez %d pièces d’or.\n"+Reset, reward)
+
+	} else if c.isDead() {
+		fmt.Println(Red + "\n💀 Vous avez été vaincu par le Gobelin..." + Reset)
+	} else {
+		// Si on quitte volontairement
+		fmt.Println(Red + "\n🏳 Vous avez abandonné le combat et perdu 10 or !" + Reset)
+		if c.Gold >= 10 {
+			c.Gold -= 10
+		} else {
+			c.Gold = 0
+		}
 	}
 }

@@ -8,7 +8,7 @@ func initCharacter(nom string, classe string) *Character {
 		PVActuels:        50,
 		Gold:             100,
 		Inventaire:       []string{},
-		Skill:            []string{"Coup de poing"},
+		Skill:            []string{"Coup de poing, Boule de feu, Soin mineur"},
 		ExpActuelle:      0,
 		ExpMax:           50,
 		Niveau:           1,

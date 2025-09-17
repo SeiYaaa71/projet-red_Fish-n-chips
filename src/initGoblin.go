@@ -6,6 +6,6 @@ func initGoblin() *Monster {
 		PVMax:     40,
 		PVActuels: 40,
 		Attaque:   5,
-		ExpGagnee: 20,
+		ExpReward: 20,
 	}
 }

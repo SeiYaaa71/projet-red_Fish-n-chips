@@ -12,13 +12,19 @@ func merchant(c *Character) {
 		// Liste des items en vente
 		fmt.Println(Green + "1." + Reset + " Potion de vie (3 or)")
 		fmt.Println(Green + "2." + Reset + " Potion de poison (6 or)")
-		fmt.Println(Green + "3." + Reset + " Livre de Sort : Boule de Feu (25 or)")
-		fmt.Println(Green + "4." + Reset + " Fourrure de Loup (4 or)")
-		fmt.Println(Green + "5." + Reset + " Peau de Troll (7 or)")
-		fmt.Println(Green + "6." + Reset + " Cuir de Sanglier (3 or)")
-		fmt.Println(Green + "7." + Reset + " Plume de Corbeau (1 or)")
-		fmt.Println(Green + "8." + Reset + " Augmenter la taille de l’inventaire (30 or, max 3 fois)")
-		fmt.Println(Red + "9." + Reset + " Retour au menu principal")
+		fmt.Println(Green + "3." + Reset + " Fourrure de Loup (4 or)")
+		fmt.Println(Green + "4." + Reset + " Peau de Troll (7 or)")
+		fmt.Println(Green + "5." + Reset + " Cuir de Sanglier (3 or)")
+		fmt.Println(Green + "6." + Reset + " Plume de Corbeau (1 or)")
+
+		// ✅ Affiche l’augmentation d’inventaire seulement si < 3 upgrades
+		if c.InventoryUpgrades < 3 {
+			fmt.Printf(Green+"7."+Reset+" Augmenter la taille de l’inventaire (30 or) [%d/3]\n", c.InventoryUpgrades)
+			fmt.Println(Red + "8." + Reset + " Retour au menu principal")
+		} else {
+			fmt.Println(Red + "7." + Reset + " Retour au menu principal")
+		}
+
 		fmt.Print(Yellow + "\nVotre choix : " + Reset)
 
 		var choix int
@@ -30,25 +36,35 @@ func merchant(c *Character) {
 		case 2:
 			buyItem(c, "Potion de poison", 6)
 		case 3:
-			buyItem(c, "Livre de Sort : Boule de Feu", 25)
-		case 4:
 			buyItem(c, "Fourrure de Loup", 4)
-		case 5:
+		case 4:
 			buyItem(c, "Peau de Troll", 7)
-		case 6:
+		case 5:
 			buyItem(c, "Cuir de Sanglier", 3)
-		case 7:
+		case 6:
 			buyItem(c, "Plume de Corbeau", 1)
+		case 7:
+			if c.InventoryUpgrades < 3 {
+				if c.Gold >= 30 {
+					c.Gold -= 30
+					upgradeInventorySlot(c)
+					fmt.Printf(Green+"✅ Inventaire amélioré : %d/3\n"+Reset, c.InventoryUpgrades)
+					waitForEnter()
+				} else {
+					fmt.Println(Red + "❌ Vous n’avez pas assez de pièces d’or pour acheter une augmentation d’inventaire." + Reset)
+					waitForEnter()
+				}
+			} else {
+				// si déjà max, le 7 devient retour
+				return
+			}
 		case 8:
-		if c.Gold >= 30 {
-		c.Gold -= 30
-			upgradeInventorySlot(c)
-		} else {
-		fmt.Println(Red + "❌ Vous n’avez pas assez de pièces d’or pour acheter une augmentation d’inventaire." + Reset)
-		waitForEnter()
-		}
-		case 9:
-			return
+			if c.InventoryUpgrades < 3 {
+				return
+			} else {
+				fmt.Println(Red + "❌ Choix invalide, réessayez." + Reset)
+				waitForEnter()
+			}
 		default:
 			fmt.Println(Red + "❌ Choix invalide, réessayez." + Reset)
 			waitForEnter()

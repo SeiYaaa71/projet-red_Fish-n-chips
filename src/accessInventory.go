@@ -18,8 +18,7 @@ func accessInventory(c *Character) {
 		fmt.Println("\nOptions :")
 		fmt.Println(Green + "1." + Reset + " Utiliser une Potion de vie")
 		fmt.Println(Green + "2." + Reset + " Utiliser une Potion de poison")
-		fmt.Println(Green + "3." + Reset + " Utiliser un Livre de Sort : Boule de Feu")
-		fmt.Println(Red + "4." + Reset + " Retour au menu principal")
+		fmt.Println(Red + "3." + Reset + " Retour au menu principal")
 		fmt.Print(Yellow + "\nVotre choix : " + Reset)
 
 		var choix int
@@ -31,8 +30,6 @@ func accessInventory(c *Character) {
 		case 2:
 			takePot(c, "Potion de poison")
 		case 3:
-			spellBook(c)
-		case 4:
 			return
 		default:
 			fmt.Println(Red + "❌ Choix invalide, réessayez." + Reset)
