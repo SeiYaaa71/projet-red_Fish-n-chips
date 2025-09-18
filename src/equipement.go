@@ -27,6 +27,15 @@ func equipItem(c *Character, item string) {
 		}
 		c.Equipement.Pieds = item
 		fmt.Println(Green + "✅ Vous avez équipé : " + item + Reset)
+
+	// Directement équiper l’épée
+	if c.Equipement.Arme != "" {
+	c.Inventaire = append(c.Inventaire, c.Equipement.Arme)
+	fmt.Println(Yellow + "↺ " + c.Equipement.Arme + " a été replacé dans l’inventaire." + Reset)
+	}
+	c.Equipement.Arme = "Épée du Forgeron (+10 dmg)"
+	c.Attaque += 10
+	fmt.Println(Green + "✅ Vous avez forgé et équipé : Épée du Forgeron (+10 dmg)" + Reset)
 	}
 
 	// Retirer l’objet de l’inventaire

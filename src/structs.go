@@ -4,6 +4,7 @@ type Equipment struct {
 	Tete  string
 	Torse string
 	Pieds string
+	Arme  string
 }
 
 type Effect struct {

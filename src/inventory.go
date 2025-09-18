@@ -34,3 +34,32 @@ func removeInventory(c *Character, item string) bool {
 	}
 	return false
 }
+
+func hasItem(c *Character, item string, count int) bool {
+	quantité := 0
+	for _, invItem := range c.Inventaire {
+		if invItem == item {
+			quantité++
+			if quantité >= count {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// Retire `count` exemplaires d’un item de l’inventaire
+func removeItem(c *Character, item string, count int) {
+	nouveauInv := []string{}
+	àRetirer := count
+
+	for _, invItem := range c.Inventaire {
+		if invItem == item && àRetirer > 0 {
+			àRetirer--
+			continue // on "consomme" l’item, donc on ne le garde pas
+		}
+		nouveauInv = append(nouveauInv, invItem)
+	}
+
+	c.Inventaire = nouveauInv
+}
