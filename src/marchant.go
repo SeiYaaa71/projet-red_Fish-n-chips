@@ -18,6 +18,7 @@ func merchant(c *Character) {
 		fmt.Println(Green + "6." + Reset + " Plume de Corbeau (1 or)")
 		fmt.Println(Green + "7." + Reset + " Fer (30 or)")
 		fmt.Println(Green + "8." + Reset + " Bois (20 or)")
+		fmt.Println(Green + "10." + Reset + " Vendre un objet")
 
 		// ✅ Affiche l’augmentation d’inventaire seulement si < 3 upgrades
 		if c.InventoryUpgrades < 3 {
@@ -77,6 +78,8 @@ func merchant(c *Character) {
 				// si déjà max, le 9 devient retour
 				return
 			}
+			case 10:
+			sellItem(c)
 		case 0:
 			return
 		default:
