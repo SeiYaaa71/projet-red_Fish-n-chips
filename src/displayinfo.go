@@ -7,7 +7,7 @@ func displayInfo(c *Character) {
 	fmt.Printf("👤 Nom      : %s\n", c.Nom)
 	fmt.Printf("⚔️  Classe   : %s\n", c.Classe)
 	fmt.Printf("⭐ Niveau   : %d\n", c.Niveau)
-	fmt.Printf("🧙‍♂️ Expérience : %d / %d\n", c.ExpActuelle, c.ExpMax)
+	fmt.Printf("🧙‍♂️  Expérience : %d / %d\n", c.ExpActuelle, c.ExpMax)
 	fmt.Printf("❤️  PV      : %d / %d\n", c.PVActuels, c.PVMax)
 	fmt.Printf("💰 Or      : %d\n", c.Gold)
 	fmt.Printf("🎒 Inventaire : %d / %d slots utilisés\n", len(c.Inventaire), c.InventoryMax)

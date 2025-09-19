@@ -51,14 +51,17 @@ func merchant(c *Character) {
 				c.Gold -= 30
 				c.Inventaire = append(c.Inventaire, "Fer")
 				fmt.Println("✅ Vous avez acheté du Fer.")
+				waitForEnter()
 			} else {
 				fmt.Println("❌ Pas assez d’or.")
+				waitForEnter()
 			}
 		case 8:
 			if c.Gold >= 20 {
 				c.Gold -= 20
 				c.Inventaire = append(c.Inventaire, "Bois")
 				fmt.Println("✅ Vous avez acheté du Bois.")
+				waitForEnter()
 			} else {
 				fmt.Println("❌ Pas assez d’or.")
 				waitForEnter()

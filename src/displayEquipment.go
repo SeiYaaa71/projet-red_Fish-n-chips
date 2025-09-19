@@ -4,7 +4,7 @@ import "fmt"
 
 func displayEquipment(c *Character) {
 	fmt.Println("=== ÉQUIPEMENT ===")
-	fmt.Println("🪖 Tête  :", equipOrNone(c.Equipement.Tete))
+	fmt.Println("🪖  Tête  :", equipOrNone(c.Equipement.Tete))
 	fmt.Println("👕 Torse :", equipOrNone(c.Equipement.Torse))
 	fmt.Println("🥾 Pieds :", equipOrNone(c.Equipement.Pieds))
 

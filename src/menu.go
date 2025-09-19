@@ -13,7 +13,7 @@ func menu(c *Character) {
 		fmt.Println(Green + "3." + Reset + " Marchand")
 		fmt.Println(Green + "4." + Reset + " Forgeron")
 		fmt.Println(Green + "5." + Reset + " Équipement")
-		fmt.Println(Green + "6." + Reset + " Combat d’entraînement")
+		fmt.Println(Blue + "6." + Reset + " Combat d’entraînement")
 		fmt.Println(Purple + "7." + Reset + " Mode Donjon")
 		fmt.Println(Red + "8." + Reset + " Quitter le jeu")
 

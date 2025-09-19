@@ -6,7 +6,7 @@ func initCharacter(nom string, classe string) *Character {
 		Classe:           classe,
 		PVMax:            100, // ou selon la classe
 		PVActuels:        50,
-		Gold:             100,
+		Gold:             500,
 		Inventaire:       []string{},
 		Skill:            []string{"Coup de poing, Boule de feu, Soin mineur"},
 		ExpActuelle:      0,
