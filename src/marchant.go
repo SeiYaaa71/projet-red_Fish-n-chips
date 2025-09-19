@@ -18,11 +18,11 @@ func merchant(c *Character) {
 		fmt.Println(Green + "6." + Reset + " Plume de Corbeau (1 or)")
 		fmt.Println(Green + "7." + Reset + " Fer (30 or)")
 		fmt.Println(Green + "8." + Reset + " Bois (20 or)")
-		fmt.Println(Green + "10." + Reset + " Vendre un objet")
+		fmt.Println(Green + "9." + Reset + " Vendre un objet")
 
 		// ✅ Affiche l’augmentation d’inventaire seulement si < 3 upgrades
 		if c.InventoryUpgrades < 3 {
-			fmt.Printf(Green+"9."+Reset+" Augmenter la taille de l’inventaire (30 or) [%d/3]\n", c.InventoryUpgrades)
+			fmt.Printf(Green+"10."+Reset+" Augmenter la taille de l’inventaire (30 or) [%d/3]\n", c.InventoryUpgrades)
 			fmt.Println(Red + "0." + Reset + " Retour au menu principal")
 		} else {
 			fmt.Println(Red + "0." + Reset + " Retour au menu principal")
@@ -63,7 +63,7 @@ func merchant(c *Character) {
 				fmt.Println("❌ Pas assez d’or.")
 				waitForEnter()
 			}
-		case 9:
+		case 10:
 			if c.InventoryUpgrades < 3 {
 				if c.Gold >= 30 {
 					c.Gold -= 30
@@ -78,7 +78,7 @@ func merchant(c *Character) {
 				// si déjà max, le 9 devient retour
 				return
 			}
-			case 10:
+			case 9:
 			sellItem(c)
 		case 0:
 			return
